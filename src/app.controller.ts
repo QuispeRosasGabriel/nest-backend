@@ -24,8 +24,11 @@ export class AppController {
   }
 
   @Get('products')
-  public getProducts(@Query() params: any) {
-    const { limit, offset } = params;
-    return `${limit} and ${offset} `;
+  public getProducts(
+    @Query('limit') limit: number,
+    @Query('offset') offset: number,
+    @Query('brand') brand: string,
+  ) {
+    return `${limit} and ${offset} and ${brand} `;
   }
 }
