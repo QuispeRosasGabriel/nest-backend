@@ -1,4 +1,15 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+  HttpStatus,
+  HttpCode,
+} from '@nestjs/common';
 import { IProduct } from 'src/utils/interfaces';
 
 @Controller('products')
@@ -20,6 +31,7 @@ export class ProductsController {
   }
 
   @Get('/:productId')
+  @HttpCode(HttpStatus.OK)
   public getOne(@Param('productId') productId: string): string {
     return `Product ${productId}`;
   }
