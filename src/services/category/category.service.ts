@@ -29,4 +29,19 @@ export class CategoryService {
       img: '',
     },
   ];
+
+  public findAll() {
+      return this.products;
+  }
+  
+  public findOne (id: number) {
+      return this.products.find((product) => product.id === id);
+  }
+
+  public create (payload) {
+      const newProduct = {
+          
+      }
+  }
+
 }
