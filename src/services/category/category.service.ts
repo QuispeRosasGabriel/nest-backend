@@ -1,15 +1,32 @@
 import { Injectable } from '@nestjs/common';
+import { Product } from 'src/entities/product.entity';
 
 @Injectable()
-export class CategoryService {}
-import { Injectable } from '@nestjs/common';
-import { IProduct } from 'src/utils/interfaces';
-
-@Injectable()
-export class ServiceNameService {
-  private products: Array<IProduct> = [
-      {
-          id:
-      }
+export class CategoryService {
+  private products: Array<Product> = [
+    {
+      id: 1,
+      name: 't-shirt',
+      stock: 1,
+      price: 120,
+      description: 'my t-shirt',
+      img: '',
+    },
+    {
+      id: 2,
+      name: 't-shirt',
+      stock: 4,
+      price: 120,
+      description: 'my t-shirt',
+      img: '',
+    },
+    {
+      id: 3,
+      name: 't-shirt',
+      stock: 5,
+      price: 120,
+      description: 'my t-shirt',
+      img: '',
+    },
   ];
 }
