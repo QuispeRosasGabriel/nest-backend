@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Param, Post, Query } from '@nestjs/common';
 
 @Controller('products')
 export class ProductsController {
@@ -17,9 +17,15 @@ export class ProductsController {
   }
 
   @Get('/:productId')
-  public getProduct(@Param('productId') productId: string): string {
+  public getOne(@Param('productId') productId: string): string {
     return `Product ${productId}`;
   }
 
-  //QUERY PARAMS
+  @Post()
+  public create(): Record<string, string> {
+    return {
+      status: 'ok',
+      message: 'creado',
+    };
+  }
 }
