@@ -11,18 +11,21 @@ import {
   HttpCode,
 } from '@nestjs/common';
 import { IProduct } from 'src/utils/interfaces';
-
+import { ProductService } from '../../services/product/product.service';
 @Controller('products')
 export class ProductsController {
+  public constructor(private readonly productService: ProductService) {}
+
   @Get('')
   public getProducts(
     @Query('limit') limit = 100,
     @Query('offset') offset = 0,
     @Query('brand') brand: string,
   ) {
-    return {
+    return this.productService.findAll();
+    /*return {
       message: `you searched for ${limit} and ${offset} and ${brand}`,
-    };
+    };*/
   }
 
   @Get('products/filter')
@@ -32,25 +35,18 @@ export class ProductsController {
 
   @Get('/:productId')
   @HttpCode(HttpStatus.OK)
-  public getOne(@Param('productId') productId: string): string {
-    return `Product ${productId}`;
+  public getOne(@Param('productId') productId: string) {
+    return this.productService.findOne(+productId);
   }
 
   @Post()
   public create(@Body() payload: IProduct): Record<string, unknown> {
-    return {
-      status: 'ok',
-      message: 'creado',
-      payload,
-    };
+    return this.productService.create(payload);
   }
 
   @Put(':id')
   public update(@Param('id') id: number, @Body() payload: unknown) {
-    return {
-      id,
-      payload,
-    };
+    return this.productService.update(id, payload);
   }
 
   @Delete(':id')
