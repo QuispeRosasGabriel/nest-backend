@@ -1,4 +1,5 @@
-import { Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { IProduct } from 'src/utils/interfaces';
 
 @Controller('products')
 export class ProductsController {
@@ -8,7 +9,9 @@ export class ProductsController {
     @Query('offset') offset = 0,
     @Query('brand') brand: string,
   ) {
-    return `${limit} and ${offset} and ${brand} `;
+    return {
+      message: `you searched for ${limit} and ${offset} and ${brand}`,
+    };
   }
 
   @Get('products/filter')
@@ -22,10 +25,11 @@ export class ProductsController {
   }
 
   @Post()
-  public create(): Record<string, string> {
+  public create(@Body() payload: IProduct): Record<string, unknown> {
     return {
       status: 'ok',
       message: 'creado',
+      payload,
     };
   }
 }
