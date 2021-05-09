@@ -3,11 +3,18 @@ import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  public constructor(private readonly appService: AppService) {}
 
   @Get()
   getHello(): string {
     return this.appService.getHello();
+  }
+
+  //Static routes must be before of dynamic routes
+
+  @Get('products/filter')
+  public getProductFilter() {
+    return 'Yo soy filter';
   }
 
   @Get('products/:productId')
@@ -23,10 +30,11 @@ export class AppController {
     return `Product ${productId} and ${id}`;
   }
 
+  //QUERY PARAMS
   @Get('products')
   public getProducts(
-    @Query('limit') limit: number,
-    @Query('offset') offset: number,
+    @Query('limit') limit = 100,
+    @Query('offset') offset = 0,
     @Query('brand') brand: string,
   ) {
     return `${limit} and ${offset} and ${brand} `;
