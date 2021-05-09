@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { IProduct } from 'src/utils/interfaces';
 
 @Controller('products')
@@ -30,6 +30,21 @@ export class ProductsController {
       status: 'ok',
       message: 'creado',
       payload,
+    };
+  }
+
+  @Put(':id')
+  public update(@Param('id') id: number, @Body() payload: unknown) {
+    return {
+      id,
+      payload,
+    };
+  }
+
+  @Delete(':id')
+  public delete(@Param('id') id: number) {
+    return {
+      message: `el producto con id: ${id} fue eliminado`,
     };
   }
 }
